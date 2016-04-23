@@ -1,4 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>{{ data.title }}!</h1>
+    {# <h1>{{ data.title }}!</h1> #}
+    
+    <leaflet lf-center="center" url-hash-center="yes" width="100%" height="480px"></leaflet>
+
+      <ul>
+          <li><input type="number" step="any" ng-model="center.lat" /> Latitude</li>
+          <li><input type="number" step="any" ng-model="center.lng" /> Longitude</li>
+          <li><input type="number" step="any" ng-model="center.zoom" /> Zoom</li>
+      </ul>
+      <ul>
+        <li><a href="" ng-click="changeLocation('-31.3556983:-64.242883:18')">ASC Córdoba</a>
+      </ul>
 {% endblock %}

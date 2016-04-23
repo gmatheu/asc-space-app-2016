@@ -1,12 +1,47 @@
-<html>
+<html ng-app="asc-space-app" >
   <head>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <script src="https://opensource.keycdn.com/angularjs/1.5.3/angular.min.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+
+    <script src="https://raw.githubusercontent.com/nmccready/angular-simple-logger/master/dist/angular-simple-logger.min.js"></script>
+    <script src="https://raw.githubusercontent.com/angular-ui/ui-leaflet/master/dist/ui-leaflet.min.js"></script>
+
+    <script>
+        var app = angular.module('asc-space-app', ['ui-leaflet']);
+        app.controller('BasicCenterUrlHashController', [ '$scope', '$location', function($scope, $location) {
+            angular.extend($scope, {
+                center: {
+                    lat: 34.1473584,
+                    lng: -118.1513063,
+                    zoom: 17
+                }
+            });
+            $scope.$on("centerUrlHash", function(event, centerHash) {
+                console.log("url", centerHash);
+                $location.search({ c: centerHash });
+            });
+
+            $scope.changeLocation = function(centerHash) {
+                $location.search({ c: centerHash });
+            };
+
+        }]);
+    </script>
+    <style>
+        input {
+            width: 120px;
+            margin-right: 10px;
+        }
+    </style>
+
     {% if title %}
     <title>{{ title }} - asc-space-app-2016</title>
     {% else %}
     <title>asc-space-app-2016</title>
     {% endif %}
   </head>
-  <body>
+  <body ng-controller="BasicCenterUrlHashController">
     <div><a href="/index">Home</a></div>
     <hr>
     {% block content %}{% endblock %}
