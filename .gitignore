@@ -1,0 +1,9 @@
+
+tmp
+bin
+*.zip
+*.pyc
+lib
+include
+pip-selfcheck.json
+local
