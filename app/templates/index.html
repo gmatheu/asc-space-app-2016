@@ -1,4 +1,35 @@
 {% extends "base.html" %}
+
+{% block head %}
+    <script>
+        var app = angular.module('asc-space-app', ['ui-leaflet']);
+        app.controller('BasicController', [ '$scope', '$location', function($scope, $location) {
+            angular.extend($scope, {
+                center: {
+                    lat: 34.1473584,
+                    lng: -118.1513063,
+                    zoom: 17
+                }
+            });
+            $scope.$on("centerUrlHash", function(event, centerHash) {
+                console.log("url", centerHash);
+                $location.search({ c: centerHash });
+            });
+
+            $scope.changeLocation = function(centerHash) {
+                $location.search({ c: centerHash });
+            };
+
+        }]);
+    </script>
+    <style>
+        input {
+            width: 120px;
+            margin-right: 10px;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
     {# <h1>{{ data.title }}!</h1> #}
     

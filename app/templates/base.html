@@ -1,39 +1,17 @@
 <html ng-app="asc-space-app" >
   <head>
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <link rel="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.js"></script>
     <script src="https://opensource.keycdn.com/angularjs/1.5.3/angular.min.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
 
     <script src={{ url_for('static', filename="js/vendor/angular-simple-logger.min.js")}}></script>
     <script src={{ url_for('static', filename="js/vendor/ui-leaflet.min.js")}}></script>
 
-    <script>
-        var app = angular.module('asc-space-app', ['ui-leaflet']);
-        app.controller('BasicCenterUrlHashController', [ '$scope', '$location', function($scope, $location) {
-            angular.extend($scope, {
-                center: {
-                    lat: 34.1473584,
-                    lng: -118.1513063,
-                    zoom: 17
-                }
-            });
-            $scope.$on("centerUrlHash", function(event, centerHash) {
-                console.log("url", centerHash);
-                $location.search({ c: centerHash });
-            });
-
-            $scope.changeLocation = function(centerHash) {
-                $location.search({ c: centerHash });
-            };
-
-        }]);
-    </script>
-    <style>
-        input {
-            width: 120px;
-            margin-right: 10px;
-        }
-    </style>
+    {% block head %}
+    {% endblock %}
 
     {% if title %}
     <title>{{ title }} - asc-space-app-2016</title>
@@ -41,9 +19,8 @@
     <title>asc-space-app-2016</title>
     {% endif %}
   </head>
-  <body ng-controller="BasicCenterUrlHashController">
-    <div><a href="/index">Home</a></div>
-    <hr>
-    {% block content %}{% endblock %}
+  <body ng-controller="BasicController">
+      {% block content %}
+      {% endblock %}
   </body>
 </html>
