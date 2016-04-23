@@ -40,7 +40,6 @@ class WeatherAnswer(object):
 
 class WeatherBase(object):
     def __init__(self, map_point=None):
-        self._base_url = None
         self._format = None
         self._lang = None
         self._unit = None
