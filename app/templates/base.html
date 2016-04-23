@@ -4,8 +4,8 @@
     <script src="https://opensource.keycdn.com/angularjs/1.5.3/angular.min.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
 
-    <script src="https://raw.githubusercontent.com/nmccready/angular-simple-logger/master/dist/angular-simple-logger.min.js"></script>
-    <script src="https://raw.githubusercontent.com/angular-ui/ui-leaflet/master/dist/ui-leaflet.min.js"></script>
+    <script src={{ url_for('static', filename="js/vendor/angular-simple-logger.min.js")}}></script>
+    <script src={{ url_for('static', filename="js/vendor/ui-leaflet.min.js")}}></script>
 
     <script>
         var app = angular.module('asc-space-app', ['ui-leaflet']);
