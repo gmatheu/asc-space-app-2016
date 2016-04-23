@@ -31,17 +31,59 @@
 {% endblock %}
 
 {% block content %}
-    {# <h1>{{ data.title }}!</h1> #}
-    
+<div class="ui stackable grid container">
+  <div class="twelve wide column">
     <leaflet lf-center="center" url-hash-center="yes" width="100%" height="480px"></leaflet>
+  </div>
+  <div class="four wide column">
+      <div class="ui statistics blue segment">
+        <div class="ui statistic">
+          <div class="value">
+            100%
+          </div>
+          <div class="label">
+            Humidity
+          </div>
+        </div>
+        <div class="statistic">
+          <div class="value">
+            31 C
+          </div>
+          <div class="label">
+            Temperature
+          </div>
+        </div>
+        <div class="statistic">
+          <div class="value">
+            22 mph
+          </div>
+          <div class="label">
+            Wind Speed
+          </div>
+        </div>
+      </div>
+      <ul class="ui red segment">
+          <li class="ui list labeled input">
+            <div class="ui label">Latitude</div>
+            <input type="number" placeholder="" step="any" ng-model="center.lat" />
+          </li>
+          <li class="ui list labeled input">
+            <div class="ui label">Longitude</div>
+            <input type="number" placeholder="" step="any" ng-model="center.lng" /></li>
+          <li class="ui list labeled input">
+            <div class="ui label">Zoom</div>
+            <input type="number" placeholder="" step="any" ng-model="center.zoom" /></li>
+      </ul>
+      <ul class="ui green segment">
+        <li class="ui list">
+          <i class="home icon"></i>
+          <a href="" ng-click="center.autoDiscover=true">My Location</a></li>
+        <li class="ui list">
+          <i class="marker icon"></i>
+          <a href="" ng-click="changeLocation('-31.3556983:-64.242883:18')">ASC Córdoba</a></li>
+      </ul>
+  </div>
+</div>
 
-      <ul>
-          <li><input type="number" step="any" ng-model="center.lat" /> Latitude</li>
-          <li><input type="number" step="any" ng-model="center.lng" /> Longitude</li>
-          <li><input type="number" step="any" ng-model="center.zoom" /> Zoom</li>
-      </ul>
-      <ul>
-        <li><a href="" ng-click="center.autoDiscover=true">My Location</a></li>
-        <li><a href="" ng-click="changeLocation('-31.3556983:-64.242883:18')">ASC Córdoba</a></li>
-      </ul>
+
 {% endblock %}
