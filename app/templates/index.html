@@ -12,7 +12,6 @@
                 }
             });
             $scope.$on("centerUrlHash", function(event, centerHash) {
-                console.log("url", centerHash);
                 $location.search({ c: centerHash });
             });
 
@@ -23,42 +22,40 @@
         }]);
     </script>
     <style>
-        input {
-            width: 120px;
-            margin-right: 10px;
-        }
     </style>
 {% endblock %}
 
 {% block content %}
 <div class="ui stackable grid container">
   <div class="twelve wide column">
-    <leaflet lf-center="center" url-hash-center="yes" width="100%" height="480px"></leaflet>
+    <leaflet lf-center="center" url-hash-center="yes" width="100%" height="100%" style="min-height: 480px;"></leaflet>
   </div>
   <div class="four wide column">
-      <div class="ui statistics blue segment">
-        <div class="ui statistic">
-          <div class="value">
-            100%
+      <div class="ui blue segment">
+        <div class="ui blue statistics">
+          <div class="ui statistic">
+            <div class="value">
+              100%
+            </div>
+            <div class="label">
+              Humidity
+            </div>
           </div>
-          <div class="label">
-            Humidity
+          <div class="statistic">
+            <div class="value">
+              31 C
+            </div>
+            <div class="label">
+              Temperature
+            </div>
           </div>
-        </div>
-        <div class="statistic">
-          <div class="value">
-            31 C
-          </div>
-          <div class="label">
-            Temperature
-          </div>
-        </div>
-        <div class="statistic">
-          <div class="value">
-            22 mph
-          </div>
-          <div class="label">
-            Wind Speed
+          <div class="statistic">
+            <div class="value">
+              22 mph
+            </div>
+            <div class="label">
+              Wind Speed
+            </div>
           </div>
         </div>
       </div>
