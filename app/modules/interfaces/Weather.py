@@ -45,6 +45,7 @@ class WeatherBase(object):
         self._unit = None
         self._point = map_point
         self._anwser = None
+        self._source = None
 
     @property
     def point(self):
@@ -63,7 +64,7 @@ class WeatherBase(object):
         self._build_answer()
 
     def _build_answer(self):
-        self._anwser = json.loads(self._request_result)
+        pass
 
     def answer(self):
         return self._anwser
@@ -81,6 +82,7 @@ class WeatherMapClick(WeatherBase):
         self._format = "json"
         self._lang = "english"
         self._unit = "metric"
+        self._source = "WPC"
 
     def _build_url(self):
         url = ("{base}?lat={lat}&lon={lon}&unit={unit}&lg="
@@ -91,6 +93,20 @@ class WeatherMapClick(WeatherBase):
                                                 lang=self._lang,
                                                 type=self._format)
         return url
+
+    def _build_answer(self):
+        answer = json.loads(self._request_result)
+        temperature = (answer.get('data', {}).get('temperature'))
+        current = answer.get('currentobservation')
+
+        self._anwser = WeatherAnswer(source=self._source,
+                                     temp=temperature[0],
+                                     temp_min=None,
+                                     temp_max=None,
+                                     humidity=None,
+                                     pressure=None,
+                                     wind_speed=current.get('Winds'),
+                                     dt=current.get('Date'))
 
 
 class OpenWeatherMap(WeatherBase):
@@ -111,6 +127,7 @@ class OpenWeatherMap(WeatherBase):
         self._url_template = ("{base}?lat={lat}&lon={lon}"
                               "&units={unit}&appid={appid}")
         self._unit = "metric"
+        self._source = "OWM"
 
     def _build_url(self):
         url = self._url_template.format(base=self._base_url,
@@ -119,3 +136,16 @@ class OpenWeatherMap(WeatherBase):
                                         unit=self._unit,
                                         appid=self._apikey)
         return url
+
+    def _build_answer(self):
+        answer = json.loads(self._request_result)
+        main = answer.get('main')
+        wind = answer.get('wind')
+        self._anwser = WeatherAnswer(source=self._source,
+                                     temp=main.get('temp'),
+                                     temp_min=main.get('temp_min'),
+                                     temp_max=main.get('temp_max'),
+                                     humidity=main.get('humidity'),
+                                     pressure=main.get('pressure'),
+                                     wind_speed=wind.get('speed'),
+                                     dt=answer.get('dt'))
