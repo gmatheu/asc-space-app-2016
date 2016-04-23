@@ -59,9 +59,8 @@ class WeatherBase(object):
         # Virtual method.
         pass
 
-    def _request(self):
+    def request(self):
         self._request_result = requests.get(self._build_url()).content
-        print self._request_result
         self._build_answer()
 
     def _build_answer(self):
@@ -83,7 +82,6 @@ class WeatherMapClick(WeatherBase):
         self._format = "json"
         self._lang = "english"
         self._unit = "metric"
-        self._request()
 
     def _build_url(self):
         url = ("{base}?lat={lat}&lon={lon}&unit={unit}&lg="
@@ -99,6 +97,11 @@ class WeatherMapClick(WeatherBase):
 class OpenWeatherMap(WeatherBase):
     """ Open Weather Map.
     Endpoint: http://api.openweathermap.org/data/2.5/weather
+    Usage:
+    >>> initial_point = MapPoint("-31.000", "-64.000")
+    >>> clima = OpenWeatherMap(initial_point)
+    >>> clima.request()
+    >>> clima.answer()
     """
 
     _base_url = "http://api.openweathermap.org/data/2.5/weather"
@@ -109,7 +112,6 @@ class OpenWeatherMap(WeatherBase):
         self._url_template = ("{base}?lat={lat}&lon={lon}"
                               "&units={unit}&appid={appid}")
         self._unit = "metric"
-        self._request()
 
     def _build_url(self):
         url = self._url_template.format(base=self._base_url,
@@ -118,10 +120,3 @@ class OpenWeatherMap(WeatherBase):
                                         unit=self._unit,
                                         appid=self._apikey)
         return url
-
-
-if __name__ == "__main__":
-    #initial_point = MapPoint("60.906","-162.4406")
-    initial_point = MapPoint("-31.000", "-64.000")
-    clima = OpenWeatherMap(initial_point)
-    print clima.answer()
