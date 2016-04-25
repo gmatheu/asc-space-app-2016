@@ -9,6 +9,19 @@
                     lat: 34.1473584,
                     lng: -118.1513063,
                     zoom: 17
+                },
+		tiles: {
+                    name: 'NASAGIBS',
+                    url: 'http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}',
+                    type: 'xyz',
+		    options: {
+			ext: 'jpg',
+			subdomains: '1234',
+			type: 'sat',
+			attribution:
+			    'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; ' +
+			    'Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency'
+		    }
                 }
             });
             $scope.$on("centerUrlHash", function(event, centerHash) {
@@ -33,7 +46,7 @@
 {% block content %}
 <div class="ui stackable grid container">
   <div class="twelve wide column">
-    <leaflet lf-center="center" url-hash-center="yes" width="100%" height="480px"></leaflet>
+    <leaflet lf-center="center" tiles="tiles" url-hash-center="yes" width="100%" height="480px"></leaflet>
   </div>
   <div class="four wide column">
       <div class="ui statistics blue segment">
